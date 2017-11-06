@@ -1,0 +1,15 @@
+colors:
+  - id: primary
+    shades:
+      - dkr
+      - dk
+      - ''
+      - lt
+      - ltr
+  - id: secondary
+    shades:
+      - dkr
+      - dk
+      - ''
+      - lt
+      - ltr
