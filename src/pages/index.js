@@ -1,12 +1,15 @@
 import React from 'react';
 
+import variables from 'sass-variable-loader!../shared/_variables.scss';
 import {getYamlNode} from '../utils';
 
-import ColorBlock from '../components/ColorBlock';
+import ColorBlockList from '../components/ColorBlockList';
 
 export default ({data}) => {
   const {siteName} = data.site.siteMetadata;
-  const colors = getYamlNode(data, 'colors');
+  const colors = Object.keys(variables)
+    .filter(k => /clr/i.test(k))
+    .reduce((acc, key) => Object.assign({}, acc, {[key]: variables[key]}), {});
 
   return (
     <div>
@@ -16,22 +19,7 @@ export default ({data}) => {
 
       <h2>Colours</h2>
 
-      <div>
-        {colors.map(color =>
-          <div key={color.id}>
-            {color.shades.map(shade => {
-              const shadeName = shade ? `-${shade}` : '';
-              const className = `bgc--${color.id}${shade}`;
-
-              return (
-                <ColorBlock key={shade} className={className}>
-                  .{className}
-                </ColorBlock>
-              );
-            })}
-          </div>
-        )}
-      </div>
+      <ColorBlockList colors={colors} />
     </div>
   );
 };
