@@ -14,11 +14,11 @@ const Layout = ({children, data}) => {
         gridAutoFlow: 'column',
         gridAutoColumns: '0fr 1fr',
       }}>
-      <div>
+      <div style={{padding: '1em'}}>
         <Menu pages={pages} />
       </div>
 
-      <main style={{padding: '0 2em'}}>
+      <main style={{padding: '2em'}}>
         {children()}
       </main>
     </div>
