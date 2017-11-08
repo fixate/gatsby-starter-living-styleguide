@@ -1,8 +1,8 @@
 import React from 'react';
 import Link from 'gatsby-link';
 
-const recurseCat = cat => {
-  const splitCats = cat.split('/');
+const recurseCat = catPath => {
+  const splitCats = catPath.split('/');
   const hasSubCats = splitCats.length > 1;
 
   return {
@@ -39,12 +39,10 @@ const Menu = ({pages}) => {
   return (
     <nav>
       {cats.map(cat => {
-        const catPages = pages.filter(
-          p =>
-            cat.name.length > 0 &&
-            new RegExp(cat.name).test(p.relativeDirectory)
-        );
         const isIndex = cat.name.length === 0;
+        const catPages = pages.filter(
+          p => !isIndex && new RegExp(cat.name).test(p.relativeDirectory)
+        );
 
         return isIndex
           ? <div style={{marginBottom: '1em'}}>
