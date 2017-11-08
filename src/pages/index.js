@@ -32,15 +32,5 @@ export const query = graphql`
         siteName
       }
     }
-    allDataYaml {
-      edges {
-        node {
-          colors {
-            id
-            shades
-          }
-        }
-      }
-    }
   }
 `;
