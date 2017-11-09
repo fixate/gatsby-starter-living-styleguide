@@ -51,7 +51,7 @@ const Menu = ({pages}) => {
           : <div key={cat.name}>
               {cat.name
                 ? <h4 style={{marginBottom: 0}}>
-                    {cat.name}
+                    {cat.name.replace('-', ' ')}
                   </h4>
                 : null}
 
