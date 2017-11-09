@@ -1,0 +1,19 @@
+buttons:
+  types:
+    - btn--primary
+
+  modifiers:
+    size:
+      - btn--large
+      - btn--small
+    width:
+      - btn--full
+
+  states:
+    - is-selected
+
+  pseudos:
+    - hover
+    - active
+    - focus
+    - disabled
