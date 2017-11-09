@@ -7,21 +7,21 @@ const recurseCat = catPath => {
 
   return {
     name: splitCats[0],
-    child: hasSubCats ? recurseCat(splitCats.slice(1).join('/')) : undefined,
+    subCat: hasSubCats ? recurseCat(splitCats.slice(1).join('/')) : undefined,
   };
 };
 
 const reduceCats = (acc, cat) => {
   const hasCat = acc.some(c => c.name === cat.name);
-  let newAcc = hasCat ? acc : acc.concat({name: cat.name, children: []});
-  newAcc = cat.child
+  let newAcc = hasCat ? acc : acc.concat({name: cat.name, subCats: []});
+  newAcc = cat.subCat
     ? newAcc.map(c => {
-        const alreadyHasChild = (c.children || [])
-          .some(child => child.name === cat.child.name);
-        c.children =
+        const alreadyHasChild = (c.subCats || [])
+          .some(subCat => subCat.name === cat.subCat.name);
+        c.subCats =
           c.name === cat.name && !alreadyHasChild
-            ? c.children.concat(cat.child).sort((a, b) => a.name > b.name)
-            : c.children;
+            ? c.subCats.concat(cat.subCat).sort((a, b) => a.name > b.name)
+            : c.subCats;
 
         return c;
       })
@@ -43,6 +43,9 @@ const Menu = ({pages}) => {
         const catPages = pages.filter(
           p => !isIndex && new RegExp(cat.name).test(p.relativeDirectory)
         );
+        const rootCatPages = catPages.filter(
+          p => p.relativeDirectory.split('/').length === 1
+        );
 
         return isIndex
           ? <div style={{marginBottom: '1em'}}>
@@ -55,35 +58,11 @@ const Menu = ({pages}) => {
                   </h4>
                 : null}
 
-              {cat.children.length
-                ? cat.children.map(child => {
-                    const childPages = catPages.filter(
-                      p =>
-                        p.relativeDirectory === [cat.name, child.name].join('/')
-                    );
-
-                    return (
-                      <div
-                        key={child.name}
-                        style={{marginBottom: '1em', marginLeft: '1em'}}>
-                        <h4 style={{marginBottom: 0}}>
-                          {child.name}
-                        </h4>
-
-                        {childPages.map((cp, i) =>
-                          <div key={cp.name}>
-                            <Link to={`${cp.relativeDirectory}/${name}`}>
-                              {cp.name.replace('-', ' ')}
-                            </Link>
-                          </div>
-                        )}
-                      </div>
-                    );
-                  })
-                : <div
+              {rootCatPages.length
+                ? <div
                     key={cat.name}
                     style={{marginBottom: '1em', marginLeft: '1em'}}>
-                    {catPages.map(cp => {
+                    {rootCatPages.map(cp => {
                       const name = cp.name === 'index' ? '' : cp.name;
 
                       return (
@@ -94,7 +73,36 @@ const Menu = ({pages}) => {
                         </div>
                       );
                     })}
-                  </div>}
+                  </div>
+                : null}
+
+              {cat.subCats.length
+                ? cat.subCats.map(subCat => {
+                    const subCatPages = catPages.filter(
+                      p =>
+                        p.relativeDirectory ===
+                        [cat.name, subCat.name].join('/')
+                    );
+
+                    return (
+                      <div
+                        key={subCat.name}
+                        style={{marginBottom: '1em', marginLeft: '1em'}}>
+                        <h4 style={{marginBottom: 0}}>
+                          {subCat.name}
+                        </h4>
+
+                        {subCatPages.map((cp, i) =>
+                          <div key={cp.name}>
+                            <Link to={`${cp.relativeDirectory}/${name}`}>
+                              {cp.name.replace('-', ' ')}
+                            </Link>
+                          </div>
+                        )}
+                      </div>
+                    );
+                  })
+                : null}
             </div>;
       })}
     </nav>
