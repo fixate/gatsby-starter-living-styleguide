@@ -1,5 +1,7 @@
 import React from 'react';
 
+import style from '../data/style.scss';
+
 import Menu from '../components/Menu';
 
 const Layout = ({children, data}) => {
