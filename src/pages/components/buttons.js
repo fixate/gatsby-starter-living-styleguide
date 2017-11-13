@@ -3,53 +3,62 @@ import React from 'react';
 import {getYamlNode} from '../../utils';
 import withPseudoClass from '../../components/hocs/withPseudoClass';
 
-const Button = () => <button>button</button>;
+const ButtonWithPseudo = withPseudoClass((props = {}) =>
+  <button {...props}>
+    button{props.children}
+  </button>
+);
+const AnchorWithPseudo = withPseudoClass((props = {}) =>
+  <a href="javascript: void(0)" {...props}>
+    a{props.children || ''}
+  </a>
+);
+const LabelWithPseudo = withPseudoClass((props = {}) =>
+  <label {...props}>
+    label{props.children}
+  </label>
+);
+const InputWithPseudo = withPseudoClass((props = {}) =>
+  <input type="submit" value={`input.${props.value}`} {...props} />
+);
 
 const Buttons = ({data}) => {
   const {modifiers, pseudos, states, types} = getYamlNode(data, 'buttons');
 
-  const makeButtonsMarkup = (type, additional, pseudoClass) => {
-    const className = `${type} ${additional || ''}`;
-    const text = [`.${type}`, additional || pseudoClass].join(
-      additional ? '.' : ':'
-    );
-    const ButtonWithPseudoClass = withPseudoClass(props =>
-      <button className={className} {...props}>
-        button{text}
-      </button>
-    );
-    const AnchorWithPseudoClass = withPseudoClass(props =>
-      <a className={className} {...props} href="#" onClick={() => {}}>
-        a{text}
-      </a>
-    );
-    const LabelWithPseudoClass = withPseudoClass(props =>
-      <label className={className} {...props}>
-        label{text}
-      </label>
-    );
-    const InputWithPseudoClass = withPseudoClass(props =>
-      <input
-        type="submit"
-        className={className}
-        value={`input.${type}.${additional}`}
-        {...props}
-      />
-    );
+  const makeButtonsMarkup = (classNamesArray, pseudoClass) => {
+    const className = classNamesArray.join(' ');
+    const text = classNamesArray
+      .map(c => `.${c}`)
+      .join('')
+      .concat(pseudoClass ? `:${pseudoClass}` : '');
 
     return (
-      <div key={`${type}${additional}`}>
-        {additional || pseudoClass
-          ? <h3>
-              {text}
-            </h3>
-          : null}
+      <div key={className}>
+        <h3>
+          {text}
+        </h3>
 
         <div className="btn-container">
-          <AnchorWithPseudoClass pseudoClass={pseudoClass} />{' '}
-          <ButtonWithPseudoClass pseudoClass={pseudoClass} />{' '}
-          <LabelWithPseudoClass pseudoClass={pseudoClass} />{' '}
-          <ButtonWithPseudoClass pseudoClass={pseudoClass} disabled />{' '}
+          <AnchorWithPseudo className={className} pseudoClass={pseudoClass}>
+            {text}
+          </AnchorWithPseudo>{' '}
+          <ButtonWithPseudo className={className} pseudoClass={pseudoClass}>
+            {text}
+          </ButtonWithPseudo>{' '}
+          <LabelWithPseudo className={className} pseudoClass={pseudoClass}>
+            {text}
+          </LabelWithPseudo>{' '}
+          <InputWithPseudo
+            className={className}
+            pseudoClass={pseudoClass}
+            value={text}
+          />
+          <ButtonWithPseudo
+            className={className}
+            pseudoClass={pseudoClass}
+            disabled>
+            {text}
+          </ButtonWithPseudo>{' '}
         </div>
         <br />
       </div>
@@ -65,23 +74,23 @@ const Buttons = ({data}) => {
           <h2>
             .{type}
           </h2>
-          {makeButtonsMarkup(type)}
+          {makeButtonsMarkup([type])}
 
           {Object.keys(modifiers).map(mkey =>
             <div key={`${type}${mkey}`}>
-              {modifiers[mkey].map(val => makeButtonsMarkup(type, val))}
+              {modifiers[mkey].map(val => makeButtonsMarkup([type, val]))}
             </div>
           )}
 
           {states.map(state =>
             <div key={`${type}${state}`}>
-              {makeButtonsMarkup(type, state)}
+              {makeButtonsMarkup([type, state])}
             </div>
           )}
 
           {pseudos.map(pseudo =>
             <div key={`${type}${pseudo}`}>
-              {makeButtonsMarkup(type, undefined, pseudo)}
+              {makeButtonsMarkup([type], pseudo)}
             </div>
           )}
         </div>
