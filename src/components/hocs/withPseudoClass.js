@@ -26,7 +26,7 @@ const getCssProps = reg => {
   return parseCssText(props.join(' '));
 };
 
-const withPseudoClassHOC = WrappedComponent =>
+const withPseudoClassHOC = WrappedComponent => {
   class WithPseudoClass extends Component {
     constructor(props) {
       super(props);
@@ -65,6 +65,11 @@ const withPseudoClassHOC = WrappedComponent =>
         />
       );
     }
-  };
+  }
+
+  WithPseudoClass.displayName = `WithPseudoClass(${WrappedComponent.displayName})`;
+
+  return WithPseudoClass;
+};
 
 export default withPseudoClassHOC;

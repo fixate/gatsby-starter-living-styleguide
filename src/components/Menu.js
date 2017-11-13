@@ -32,7 +32,8 @@ const reduceCats = (acc, cat) => {
 
 const Menu = ({pages}) => {
   const cats = pages
-    .map(p => recurseCat(p.relativeDirectory))
+    .map(({relativeDirectory}) => relativeDirectory)
+    .map(recurseCat)
     .reduce(reduceCats, [])
     .sort((a, b) => a.name > b.name);
 
@@ -48,7 +49,7 @@ const Menu = ({pages}) => {
         );
 
         return isIndex
-          ? <div style={{marginBottom: '1em'}}>
+          ? <div style={{marginBottom: '1em'}} key={cat.name}>
               <Link to="/">home</Link>
             </div>
           : <div key={cat.name}>
@@ -94,7 +95,8 @@ const Menu = ({pages}) => {
 
                         {subCatPages.map((cp, i) =>
                           <div key={cp.name}>
-                            <Link to={`${cp.relativeDirectory}/${name}`}>
+                            <Link
+                              to={`${cp.relativeDirectory}/${name}${cp.name}`}>
                               {cp.name.replace('-', ' ')}
                             </Link>
                           </div>

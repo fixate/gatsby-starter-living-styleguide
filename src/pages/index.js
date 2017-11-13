@@ -1,15 +1,16 @@
 import React from 'react';
 
-import variables from 'sass-variable-loader!../shared/_variables.scss';
-import {getYamlNode} from '../utils';
+// use !! to override other loaders in webpack, otherwise we can't get our vars
+// https://github.com/nordnet/sass-variable-loader#usage
+import colorVars from '!!sass-variable-loader!../shared/css/variables/_colors.scss';
 
 import ColorBlockList from '../components/ColorBlockList';
 
 export default ({data}) => {
   const {siteName} = data.site.siteMetadata;
-  const colors = Object.keys(variables)
+  const colors = Object.keys(colorVars)
     .filter(k => /clr/i.test(k))
-    .reduce((acc, key) => Object.assign({}, acc, {[key]: variables[key]}), {});
+    .reduce((acc, key) => Object.assign({}, acc, {[key]: colorVars[key]}), {});
 
   return (
     <div>

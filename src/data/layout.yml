@@ -2,6 +2,10 @@ layout:
   grids:
     - gw
   islands:
+    - island--large
     - island
+    - island--small
   wraps:
+    - wrap--large
     - wrap
+    - wrap--small

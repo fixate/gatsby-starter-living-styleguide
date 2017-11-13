@@ -1,6 +1,6 @@
 import React from 'react';
 
-import style from '../data/style.scss';
+import style from '../shared/css/style.scss';
 
 import Menu from '../components/Menu';
 

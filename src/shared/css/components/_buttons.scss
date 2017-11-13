@@ -1,0 +1,20 @@
+.btn--primary {
+  padding: 1em;
+  background-color: skyblue;
+
+  &:focus  {
+    background-color: yellow;
+  }
+
+  &:hover {
+    background-color: red;
+  }
+  &:active {
+    background-color: pink;
+  }
+  &:disabled {
+    border-radius: 1em;
+  }
+}
+
+.btn--full { width: 100% }
