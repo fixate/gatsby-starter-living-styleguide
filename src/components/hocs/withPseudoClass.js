@@ -35,14 +35,16 @@ const withPseudoClassHOC = WrappedComponent =>
 
     componentDidMount() {
       const w = WrappedComponent();
-      const {pseudoClass} = this.props;
+      const {className, pseudoClass} = this.props;
 
       if (!pseudoClass) return;
 
-      const pseudoClassNames = w.props.className
-        .split(' ')
-        .filter(cn => !!cn)
-        .map(cn => [cn, pseudoClass].join(':'));
+      const pseudoClassNames = className
+        ? className
+            .split(' ')
+            .filter(cn => !!cn)
+            .map(cn => [cn, pseudoClass].join(':'))
+        : '';
       const style = pseudoClassNames
         .map(pcn => new RegExp(pcn))
         .map(getCssProps)
