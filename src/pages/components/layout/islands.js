@@ -1,11 +1,10 @@
 import React from 'react';
 
 import WithComputedStyle from '../../../components/WithComputedStyle';
-import WithStyledMargin from '../../../components/WithStyledMargin';
 import withStyledPaddingHoc from '../../../components/hocs/withStyledPadding';
 import {getYamlNode} from '../../../utils';
 
-class Wrap extends React.Component {
+class Island extends React.Component {
   constructor(props) {
     super(props);
   }
@@ -14,8 +13,8 @@ class Wrap extends React.Component {
     const {computedStyle, ...restProps} = this.props;
 
     return (
-      <WithComputedStyle styleToCompute="max-width" {...restProps}>
-        <div style={{backgroundColor: '#f1f1f1'}}>
+      <WithComputedStyle styleToCompute="padding-top" {...restProps}>
+        <div style={{backgroundColor: '#f1f1f1', textAlign: 'center'}}>
           .{this.props.className}
         </div>
       </WithComputedStyle>
@@ -23,33 +22,33 @@ class Wrap extends React.Component {
   }
 }
 
-const WrapPaddingStyled = withStyledPaddingHoc(Wrap);
+const IslandPaddingStyled = withStyledPaddingHoc(Island);
 
-const Wraps = ({data}) => {
-  const classNames = getYamlNode(data, 'layout').wraps;
+const Islands = ({data}) => {
+  const classNames = getYamlNode(data, 'layout').islands;
 
   return (
     <div>
-      <h1>Wraps</h1>
+      <h1>Islands</h1>
 
       {classNames.map(c =>
-        <WithStyledMargin key={c} style={{marginBottom: '1.5rem'}}>
-          <WrapPaddingStyled className={c} />
-        </WithStyledMargin>
+        <div key={c} style={{marginBottom: '1.5rem'}}>
+          <IslandPaddingStyled className={c} />
+        </div>
       )}
     </div>
   );
 };
 
-export default Wraps;
+export default Islands;
 
 export const query = graphql`
-  query WrapsQuery {
+  query IslandsQuery {
     allDataYaml {
       edges {
         node {
           layout {
-            wraps
+            islands
           }
         }
       }
