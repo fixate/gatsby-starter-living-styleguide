@@ -19,14 +19,16 @@ class WithComputedStyle extends Component {
 
   render() {
     const {computedStyle} = this.state;
-    const {children, ...restProps} = this.props;
+    const {children, styleToCompute, ...restProps} = this.props;
 
     return (
       <div
         style={{textAlign: 'center'}}
         {...restProps}
         ref={c => (this.elemRef = c)}>
-        {children} - {computedStyle}
+        {React.cloneElement(children, {}, [
+          children.props.children.concat(` - ${computedStyle}`),
+        ])}
       </div>
     );
   }

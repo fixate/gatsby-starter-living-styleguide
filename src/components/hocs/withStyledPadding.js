@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 
+import {getDisplayName} from '../../utils';
+
 const withStyledPaddingHOC = WrappedComponent => {
   class WithStyledPadding extends Component {
     constructor(props) {
@@ -7,7 +9,7 @@ const withStyledPaddingHOC = WrappedComponent => {
     }
 
     render() {
-      const {pseudoClass, style, ...passThroughProps} = this.props;
+      const {style, ...passThroughProps} = this.props;
       const newStyle = Object.assign({}, style, {
         backgroundColor: '#c4dcb7',
       });
@@ -15,6 +17,7 @@ const withStyledPaddingHOC = WrappedComponent => {
       return (
         <WrappedComponent
           style={newStyle}
+          className={this.props.className}
           {...passThroughProps}
           ref={c => (this.elemRef = c)}
         />
@@ -22,7 +25,9 @@ const withStyledPaddingHOC = WrappedComponent => {
     }
   }
 
-  WithStyledPadding.displayName = `WithStyledPadding(${WrappedComponent.displayName})`;
+  WithStyledPadding.displayName = `WithStyledPadding(${getDisplayName(
+    WrappedComponent
+  )})`;
 
   return WithStyledPadding;
 };
