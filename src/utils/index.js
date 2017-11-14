@@ -15,3 +15,6 @@ export const splitCamelCaseString = (joiner = '-') => str =>
       return newAcc;
     }, [])
     .join(joiner);
+
+export const getDisplayName = WrappedComponent =>
+  WrappedComponent.displayName || WrappedComponent.name || 'Component';
