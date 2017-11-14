@@ -97,7 +97,7 @@ const Menu = ({pages}) => {
                           <div key={cp.name}>
                             <Link
                               to={`${cp.relativeDirectory}/${name}${cp.name}`}>
-                              {cp.name.replace('-', ' ')}
+                              {cp.name.replace(/-/g, ' ')}
                             </Link>
                           </div>
                         )}
