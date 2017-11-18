@@ -1,3 +1,5 @@
+@warn "import colors vars from your project scss into ColorBlockList, and remove this file";
+
 $clr-pink-dkr: darken(hotpink, 10%);
 $clr-pink-dk: darken(hotpink, 5%);
 $clr-pink: hotpink;
