@@ -3,35 +3,35 @@ import React from 'react';
 import {getYamlNode} from '../../../utils';
 import WithComputedStyle from '../../../components/WithComputedStyle';
 
-const FontSizes = ({data}) => {
-  const {sizes} = getYamlNode(data, 'utilitiesFonts');
+const FontFamilies = ({data}) => {
+  const {families} = getYamlNode(data, 'utilitiesFonts');
 
   return (
     <div>
-      <h1>Font Size Utilities</h1>
+      <h1>Font Family Utilities</h1>
 
-      {Object.keys(sizes).map(key =>
+      {Object.keys(families).map(key =>
         <WithComputedStyle
           key={key}
-          className={sizes[key]}
-          styleToCompute="font-size"
+          className={families[key]}
+          styleToCompute="font-family"
           style={{textAlign: 'left'}}>
-          .{sizes[key]}
+          .{families[key]}
         </WithComputedStyle>
       )}
     </div>
   );
 };
 
-export default FontSizes;
+export default FontFamilies;
 
 export const query = graphql`
-  query FontSizesQuery {
+  query FontFamiliesQuery {
     allDataYaml {
       edges {
         node {
           utilitiesFonts {
-            sizes
+            families
           }
         }
       }
