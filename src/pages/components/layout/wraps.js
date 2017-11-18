@@ -26,7 +26,7 @@ class Wrap extends React.Component {
 const WrapPaddingStyled = withStyledPaddingHoc(Wrap);
 
 const Wraps = ({data}) => {
-  const classNames = getYamlNode(data, 'layout').wraps;
+  const classNames = getYamlNode(data, 'componentsLayout').wraps;
 
   return (
     <div>

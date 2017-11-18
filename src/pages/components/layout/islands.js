@@ -25,7 +25,7 @@ class Island extends React.Component {
 const IslandPaddingStyled = withStyledPaddingHoc(Island);
 
 const Islands = ({data}) => {
-  const classNames = getYamlNode(data, 'layout').islands;
+  const classNames = getYamlNode(data, 'componentsLayout').islands;
 
   return (
     <div>
