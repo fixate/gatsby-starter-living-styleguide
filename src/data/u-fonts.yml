@@ -1,11 +1,18 @@
 utilitiesFonts:
   sizes:
+    - u-fs--giga
+    - u-fs--mega
+    - u-fs--kilo
     - u-fs--h1
     - u-fs--h2
     - u-fs--h3
     - u-fs--h4
     - u-fs--h5
     - u-fs--h6
+    - u-fs--base
+    - u-fs--milli
+    - u-fs--micro
+    - u-fs--nano
   families:
     - u-ff--alt
   colors:
