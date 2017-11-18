@@ -6,6 +6,10 @@ utilitiesFonts:
     - u-fs--h4
     - u-fs--h5
     - u-fs--h6
+    - u-fs--base
+    - u-fs--milli
+    - u-fs--micro
+    - u-fs--nano
   families:
     - u-ff--alt
   colors:
