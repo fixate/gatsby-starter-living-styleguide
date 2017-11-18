@@ -1,9 +1,17 @@
 // if these utilities are not available as classes in your project styles,
 // replace these utilities,
 // otherwise remove these utilities
-.u-fs--h1 { font-size: 4em;}
-.u-fs--h2 { font-size: 3em;}
-.u-fs--h3 { font-size: 2.5em;}
-.u-fs--h4 { font-size: 2em;}
-.u-fs--h5 { font-size: 1.75em;}
-.u-fs--h6 { font-size: 1.5em;}
+@warn "replace / remove utilities";
+
+.u-fs--h1 { font-size: 4rem;}
+.u-fs--h2 { font-size: 3rem;}
+.u-fs--h3 { font-size: 2.5rem;}
+.u-fs--h4 { font-size: 2rem;}
+.u-fs--h5 { font-size: 1.75rem;}
+.u-fs--h6 { font-size: 1.5rem;}
+
+.u-fs--base { font-size: 1rem;}
+
+.u-fs--milli { font-size: .85rem;}
+.u-fs--micro { font-size: .75rem;}
+.u-fs--nano { font-size: .5rem;}
