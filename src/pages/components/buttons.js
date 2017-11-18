@@ -23,7 +23,10 @@ const InputWithPseudo = withPseudoClass((props = {}) =>
 );
 
 const Buttons = ({data}) => {
-  const {modifiers, pseudos, states, types} = getYamlNode(data, 'buttons');
+  const {modifiers, pseudos, states, types} = getYamlNode(
+    data,
+    'componentsButtons'
+  );
 
   const makeButtonsMarkup = (classNamesArray, pseudoClass) => {
     const className = classNamesArray.join(' ');
@@ -106,7 +109,7 @@ export const query = graphql`
     allDataYaml {
       edges {
         node {
-          buttons {
+          componentsButtons {
             types
             modifiers {
               size

@@ -48,7 +48,7 @@ export const query = graphql`
     allDataYaml {
       edges {
         node {
-          layout {
+          componentsLayout {
             wraps
           }
         }
