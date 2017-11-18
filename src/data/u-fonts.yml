@@ -1,5 +1,8 @@
 utilitiesFonts:
   sizes:
+    - u-fs--giga
+    - u-fs--mega
+    - u-fs--kilo
     - u-fs--h1
     - u-fs--h2
     - u-fs--h3
