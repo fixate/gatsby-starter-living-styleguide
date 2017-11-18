@@ -1,0 +1,4 @@
+componentsForms:
+  inputs:
+    pseudos:
+      - focus
