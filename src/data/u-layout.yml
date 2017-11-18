@@ -1,0 +1,15 @@
+utilitiesLayout:
+  margins:
+    - u-margin--larger
+    - u-margin--large
+    - u-margin
+    - u-margin--small
+    - u-margin--smaller
+    - u-margin--none
+  paddings:
+    - u-padding--larger
+    - u-padding--large
+    - u-padding
+    - u-padding--small
+    - u-padding--smaller
+    - u-padding--none
