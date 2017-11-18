@@ -1,0 +1,13 @@
+utilitiesFonts:
+  sizes:
+    - u-fs--h1
+    - u-fs--h2
+    - u-fs--h3
+    - u-fs--h4
+    - u-fs--h5
+    - u-fs--h6
+  families:
+    - u-ff--alt
+  colors:
+    - u-fc--pink
+    - u-fc--blue

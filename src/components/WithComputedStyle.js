@@ -19,17 +19,20 @@ class WithComputedStyle extends Component {
 
   render() {
     const {computedStyle} = this.state;
-    const {children, styleToCompute, ...restProps} = this.props;
+    const {children, styleToCompute, style, tag, ...restProps} = this.props;
+    const elemStyle = style ? style : {textAlign: 'center'};
+    const computedToAppend = ` - ${computedStyle}`;
+    const child = Array.isArray(children)
+      ? children.concat(computedToAppend)
+      : React.cloneElement(children, {}, [
+          children.props.children.concat(computedToAppend),
+        ]);
+    const Tag = tag ? tag : 'div';
 
     return (
-      <div
-        style={{textAlign: 'center'}}
-        {...restProps}
-        ref={c => (this.elemRef = c)}>
-        {React.cloneElement(children, {}, [
-          children.props.children.concat(` - ${computedStyle}`),
-        ])}
-      </div>
+      <Tag style={elemStyle} {...restProps} ref={c => (this.elemRef = c)}>
+        {child}
+      </Tag>
     );
   }
 }
