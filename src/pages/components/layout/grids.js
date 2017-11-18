@@ -10,7 +10,7 @@ const GridItem = ({children}) =>
   </div>;
 
 const Grids = ({data}) => {
-  const classNames = getYamlNode(data, 'layout').grids;
+  const classNames = getYamlNode(data, 'componentsLayout').grids;
 
   return (
     <div>
