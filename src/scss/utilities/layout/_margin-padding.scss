@@ -1,6 +1,8 @@
 // if these utilities are not available as classes in your project styles,
 // replace these utilities,
-// otherwise rremove these utilities
+// otherwise remove these utilities
+@warn "replace / remove utilities";
+
 .u-margin--larger                { margin: 3rem;}
 .u-margin--larger--top           { margin-top: 3rem;}
 .u-margin--larger--right         { margin-right: 3rem;}
