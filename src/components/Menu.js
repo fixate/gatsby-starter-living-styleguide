@@ -106,6 +106,7 @@ const Menu = ({pages}) => {
                   })
                 : null}
             </div>;
+			  <Link to={`${cp.relativeDirectory}/${cp.name}`}>
       })}
     </nav>
   );
