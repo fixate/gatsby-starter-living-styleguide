@@ -2,7 +2,7 @@ import React from 'react';
 
 import style from '../shared/css/style.scss';
 
-import Menu from '../components/Menu';
+import SGMenu from '../components/SGMenu';
 
 const Layout = ({children, data}) => {
   const pages = data.allFile.edges
@@ -17,12 +17,10 @@ const Layout = ({children, data}) => {
         gridAutoColumns: '0fr 1fr',
       }}>
       <div style={{padding: '1em'}}>
-        <Menu pages={pages} />
+        <SGMenu pages={pages} />
       </div>
 
-      <main style={{padding: '2em'}}>
-        {children()}
-      </main>
+      <main style={{padding: '2em'}}>{children()}</main>
     </div>
   );
 };
