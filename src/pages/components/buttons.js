@@ -1,26 +1,22 @@
 import React from 'react';
 
 import {getYamlNode} from '../../utils';
-import withPseudoClass from '../../components/hocs/withPseudoClass';
+import sgWithPseudoClass from '../../components/hocs/sgWithPseudoClass';
 
-const ButtonWithPseudo = withPseudoClass((props = {}) =>
-  <button {...props}>
-    button{props.children}
-  </button>
-);
-const AnchorWithPseudo = withPseudoClass((props = {}) =>
+const ButtonWithPseudo = sgWithPseudoClass((props = {}) => (
+  <button {...props}>button{props.children}</button>
+));
+const AnchorWithPseudo = sgWithPseudoClass((props = {}) => (
   <a href="javascript: void(0)" {...props}>
     a{props.children || ''}
   </a>
-);
-const LabelWithPseudo = withPseudoClass((props = {}) =>
-  <label {...props}>
-    label{props.children}
-  </label>
-);
-const InputWithPseudo = withPseudoClass((props = {}) =>
+));
+const LabelWithPseudo = sgWithPseudoClass((props = {}) => (
+  <label {...props}>label{props.children}</label>
+));
+const InputWithPseudo = sgWithPseudoClass((props = {}) => (
   <input type="submit" value={`input.${props.value}`} {...props} />
-);
+));
 
 const Buttons = ({data}) => {
   const {modifiers, pseudos, states, types} = getYamlNode(
@@ -37,9 +33,7 @@ const Buttons = ({data}) => {
 
     return (
       <div key={className}>
-        <h3>
-          {text}
-        </h3>
+        <h3>{text}</h3>
 
         <div className="btn-container">
           <AnchorWithPseudo className={className} pseudoClass={pseudoClass}>
@@ -72,32 +66,30 @@ const Buttons = ({data}) => {
     <div>
       <h1>Buttons</h1>
 
-      {types.map(type =>
+      {types.map(type => (
         <div key={type}>
-          <h2>
-            .{type}
-          </h2>
+          <h2>.{type}</h2>
           {makeButtonsMarkup([type])}
 
-          {Object.keys(modifiers).map(mkey =>
+          {Object.keys(modifiers).map(mkey => (
             <div key={`${type}${mkey}`}>
               {modifiers[mkey].map(val => makeButtonsMarkup([type, val]))}
             </div>
-          )}
+          ))}
 
-          {states.map(state =>
+          {states.map(state => (
             <div key={`${type}${state}`}>
               {makeButtonsMarkup([type, state])}
             </div>
-          )}
+          ))}
 
-          {pseudos.map(pseudo =>
+          {pseudos.map(pseudo => (
             <div key={`${type}${pseudo}`}>
               {makeButtonsMarkup([type], pseudo)}
             </div>
-          )}
+          ))}
         </div>
-      )}
+      ))}
     </div>
   );
 };

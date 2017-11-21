@@ -1,8 +1,8 @@
 import React from 'react';
 
-import WithStyledMargin from '../../../components/WithStyledMargin';
-import WithComputedStyle from '../../../components/WithComputedStyle';
-import withStyledPaddingHoc from '../../../components/hocs/withStyledPadding';
+import SGWithStyledMargin from '../../../components/SGWithStyledMargin';
+import SGWithComputedStyle from '../../../components/SGWithComputedStyle';
+import sgWithStyledPaddingHoc from '../../../components/hocs/sgWithStyledPadding';
 import {getYamlNode} from '../../../utils';
 
 const PaddingItem = props => {
@@ -13,39 +13,37 @@ const PaddingItem = props => {
   });
 
   return (
-    <WithComputedStyle
+    <SGWithComputedStyle
       style={newStyle}
       styleToCompute={'padding-bottom'}
       {...restProps}>
       <div style={{backgroundColor: '#f1f1f1', textAlign: 'center'}}>
         {children}
       </div>
-    </WithComputedStyle>
+    </SGWithComputedStyle>
   );
 };
 
-const PaddingItemStyled = withStyledPaddingHoc(PaddingItem);
+const PaddingItemStyled = sgWithStyledPaddingHoc(PaddingItem);
 
 const MarginItemStyled = props => {
   const {children, className, ...restProps} = props;
 
   return (
-    <WithStyledMargin
+    <SGWithStyledMargin
       style={{
         marginBottom: '1.5rem',
         display: 'table',
         width: '100%',
       }}
       {...restProps}>
-      <WithComputedStyle
+      <SGWithComputedStyle
         className={className}
         style={{backgroundColor: '#f1f1f1'}}
         styleToCompute={'margin-bottom'}>
-        <div>
-          {children}
-        </div>
-      </WithComputedStyle>
-    </WithStyledMargin>
+        <div>{children}</div>
+      </SGWithComputedStyle>
+    </SGWithStyledMargin>
   );
 };
 
@@ -58,19 +56,19 @@ const MarginsAndPadding = ({data}) => {
 
       <h2>Margins</h2>
 
-      {margins.map(m =>
+      {margins.map(m => (
         <MarginItemStyled key={m} className={m}>
           @mixin {m}
         </MarginItemStyled>
-      )}
+      ))}
 
       <h2>Padding</h2>
 
-      {paddings.map(p =>
+      {paddings.map(p => (
         <PaddingItemStyled className={p} key={p}>
           @mixin {p}
         </PaddingItemStyled>
-      )}
+      ))}
     </div>
   );
 };

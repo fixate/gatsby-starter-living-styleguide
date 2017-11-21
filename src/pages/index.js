@@ -2,18 +2,16 @@ import React from 'react';
 
 import '../scss/style.scss';
 
-import ColorBlockList from '../components/ColorBlockList';
+import SGColorBlockList from '../components/SGColorBlockList';
 
 export default ({data}) => {
   const {siteName} = data.site.siteMetadata;
 
   return (
     <div>
-      <h1>
-        {siteName} Living Styleguide
-      </h1>
+      <h1>{siteName} Living Styleguide</h1>
 
-      <ColorBlockList />
+      <SGColorBlockList />
     </div>
   );
 };

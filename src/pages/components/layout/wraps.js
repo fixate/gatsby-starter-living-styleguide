@@ -1,8 +1,8 @@
 import React from 'react';
 
-import WithComputedStyle from '../../../components/WithComputedStyle';
-import WithStyledMargin from '../../../components/WithStyledMargin';
-import withStyledPaddingHoc from '../../../components/hocs/withStyledPadding';
+import SGWithComputedStyle from '../../../components/SGWithComputedStyle';
+import SGWithStyledMargin from '../../../components/SGWithStyledMargin';
+import sgWithStyledPaddingHoc from '../../../components/hocs/sgWithStyledPadding';
 import {getYamlNode} from '../../../utils';
 
 class Wrap extends React.Component {
@@ -14,16 +14,14 @@ class Wrap extends React.Component {
     const {computedStyle, ...restProps} = this.props;
 
     return (
-      <WithComputedStyle styleToCompute="max-width" {...restProps}>
-        <div style={{backgroundColor: '#f1f1f1'}}>
-          .{this.props.className}
-        </div>
-      </WithComputedStyle>
+      <SGWithComputedStyle styleToCompute="max-width" {...restProps}>
+        <div style={{backgroundColor: '#f1f1f1'}}>.{this.props.className}</div>
+      </SGWithComputedStyle>
     );
   }
 }
 
-const WrapPaddingStyled = withStyledPaddingHoc(Wrap);
+const WrapPaddingStyled = sgWithStyledPaddingHoc(Wrap);
 
 const Wraps = ({data}) => {
   const classNames = getYamlNode(data, 'componentsLayout').wraps;
@@ -32,11 +30,11 @@ const Wraps = ({data}) => {
     <div>
       <h1>Wraps</h1>
 
-      {classNames.map(c =>
-        <WithStyledMargin key={c} style={{marginBottom: '1.5rem'}}>
+      {classNames.map(c => (
+        <SGWithStyledMargin key={c} style={{marginBottom: '1.5rem'}}>
           <WrapPaddingStyled className={c} />
-        </WithStyledMargin>
-      )}
+        </SGWithStyledMargin>
+      ))}
     </div>
   );
 };

@@ -1,7 +1,7 @@
 import React from 'react';
 
-import WithComputedStyle from '../../../components/WithComputedStyle';
-import withStyledPaddingHoc from '../../../components/hocs/withStyledPadding';
+import SGWithComputedStyle from '../../../components/SGWithComputedStyle';
+import sgWithStyledPaddingHoc from '../../../components/hocs/sgWithStyledPadding';
 import {getYamlNode} from '../../../utils';
 
 class Island extends React.Component {
@@ -13,16 +13,16 @@ class Island extends React.Component {
     const {computedStyle, ...restProps} = this.props;
 
     return (
-      <WithComputedStyle styleToCompute="padding-top" {...restProps}>
+      <SGWithComputedStyle styleToCompute="padding-top" {...restProps}>
         <div style={{backgroundColor: '#f1f1f1', textAlign: 'center'}}>
           .{this.props.className}
         </div>
-      </WithComputedStyle>
+      </SGWithComputedStyle>
     );
   }
 }
 
-const IslandPaddingStyled = withStyledPaddingHoc(Island);
+const IslandPaddingStyled = sgWithStyledPaddingHoc(Island);
 
 const Islands = ({data}) => {
   const classNames = getYamlNode(data, 'componentsLayout').islands;
@@ -31,11 +31,11 @@ const Islands = ({data}) => {
     <div>
       <h1>Islands</h1>
 
-      {classNames.map(c =>
+      {classNames.map(c => (
         <div key={c} style={{marginBottom: '1.5rem'}}>
           <IslandPaddingStyled className={c} />
         </div>
-      )}
+      ))}
     </div>
   );
 };

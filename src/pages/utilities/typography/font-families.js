@@ -1,7 +1,7 @@
 import React from 'react';
 
 import {getYamlNode} from '../../../utils';
-import WithComputedStyle from '../../../components/WithComputedStyle';
+import SGWithComputedStyle from '../../../components/SGWithComputedStyle';
 
 const FontFamilies = ({data}) => {
   const {families} = getYamlNode(data, 'utilitiesFonts');
@@ -10,15 +10,15 @@ const FontFamilies = ({data}) => {
     <div>
       <h1>Font Family Utilities</h1>
 
-      {Object.keys(families).map(key =>
-        <WithComputedStyle
+      {Object.keys(families).map(key => (
+        <SGWithComputedStyle
           key={key}
           className={families[key]}
           styleToCompute="font-family"
           style={{textAlign: 'left'}}>
           .{families[key]}
-        </WithComputedStyle>
-      )}
+        </SGWithComputedStyle>
+      ))}
     </div>
   );
 };
