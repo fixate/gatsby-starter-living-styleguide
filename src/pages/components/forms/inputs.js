@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Inputs = ({data}) => {
+const Inputs = () => {
   return (
     <div>
       <h1>Inputs</h1>
