@@ -14,9 +14,7 @@ const AnchorWithPseudo = sgWithPseudoClass((props = {}) => (
 const LabelWithPseudo = sgWithPseudoClass((props = {}) => (
   <label {...props}>label{props.children}</label>
 ));
-const InputWithPseudo = sgWithPseudoClass((props = {}) => (
-  <input type="submit" value={`input.${props.value}`} {...props} />
-));
+const InputWithPseudo = sgWithPseudoClass((props = {}) => <input {...props} />);
 
 const Buttons = ({data}) => {
   const {modifiers, pseudos, states, types} = getYamlNode(
@@ -48,13 +46,14 @@ const Buttons = ({data}) => {
           <InputWithPseudo
             className={className}
             pseudoClass={pseudoClass}
-            value={text}
+            type="submit"
+            value={`input[type=submit]${text}`}
           />
           <ButtonWithPseudo
             className={className}
             pseudoClass={pseudoClass}
             disabled>
-            {text}
+            {text}[disabled]
           </ButtonWithPseudo>{' '}
         </div>
         <br />
