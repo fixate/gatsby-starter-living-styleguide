@@ -1,7 +1,5 @@
 import React from 'react';
 
-import '../scss/style.scss';
-
 import SGColorBlockList from '../components/SGColorBlockList';
 
 export default ({data}) => {
