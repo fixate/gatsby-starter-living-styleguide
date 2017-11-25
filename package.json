@@ -16,6 +16,7 @@
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "gatsby-source-filesystem": "^1.5.7",
     "gatsby-transformer-yaml": "^1.5.11",
-    "sass-variable-loader": "^0.1.2"
+    "sass-variable-loader": "^0.1.2",
+    "svg-sprite-loader": "^3.4.1"
   }
 }
