@@ -1,6 +1,26 @@
 componentsLayout:
   grids:
-    - gw
+    gridWraps:
+      - gw
+    gridCols:
+      widths:
+        - 1-of-1
+        - 1-of-2
+        - 1-of-3
+        - 1-of-4
+        - 1-of-5
+        - 1-of-6
+        - 1-of-8
+        - 1-of-10
+        - 1-of-12
+      viewports:
+        - palm
+        - lap
+        - portable
+        - desk
+      modifiers:
+        - auto
+        - shrink-wrap
   islands:
     - island--large
     - island
