@@ -1,0 +1,14 @@
+.icon {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+  .icon__inner { display: inline;}
+
+    .icon__inner svg {
+      color: currentColor;
+      display: block;
+      fill: currentColor;
+      height: 1em;
+      width: 1em;
+    }
