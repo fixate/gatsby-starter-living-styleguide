@@ -32,7 +32,7 @@ const Wraps = ({data}) => {
       <h1>Wraps</h1>
 
       {classNames.map(c => (
-        <div>
+        <div key={c}>
           <SGWithStyledMargin key={c} style={{marginBottom: '1.5rem'}}>
             <WrapPaddingStyled className={c} />
           </SGWithStyledMargin>
