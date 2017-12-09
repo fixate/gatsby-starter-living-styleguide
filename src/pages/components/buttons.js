@@ -1,20 +1,34 @@
 import React from 'react';
 
+import SGDemoArea from '../../components/SGDemoArea';
+
 import {getYamlNode} from '../../utils';
 import sgWithPseudoClass from '../../components/hocs/sgWithPseudoClass';
 
-const ButtonWithPseudo = sgWithPseudoClass((props = {}) => (
-  <button {...props}>button{props.children}</button>
+const ButtonWithPseudo = sgWithPseudoClass(
+  ({children = '', ...restProps} = {}) => (
+    <SGDemoArea comp={<button {...restProps}>button{children}</button>} />
+  )
+);
+const AnchorWithPseudo = sgWithPseudoClass(
+  ({children = '', ...restProps} = {}) => (
+    <SGDemoArea
+      comp={
+        <a href="javascript: void(0)" {...restProps}>
+          a{children}
+        </a>
+      }
+    />
+  )
+);
+const LabelWithPseudo = sgWithPseudoClass(
+  ({children = '', ...restProps} = {}) => (
+    <SGDemoArea comp={<label {...restProps}>label{children}</label>} />
+  )
+);
+const InputWithPseudo = sgWithPseudoClass(props => (
+  <SGDemoArea comp={<input {...props} />} />
 ));
-const AnchorWithPseudo = sgWithPseudoClass((props = {}) => (
-  <a href="javascript: void(0)" {...props}>
-    a{props.children || ''}
-  </a>
-));
-const LabelWithPseudo = sgWithPseudoClass((props = {}) => (
-  <label {...props}>label{props.children}</label>
-));
-const InputWithPseudo = sgWithPseudoClass((props = {}) => <input {...props} />);
 
 const Buttons = ({data}) => {
   const {modifiers, pseudos, states, types} = getYamlNode(

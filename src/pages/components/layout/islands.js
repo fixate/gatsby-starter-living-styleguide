@@ -1,5 +1,6 @@
 import React from 'react';
 
+import SGDemoArea from '../../../components/SGDemoArea';
 import SGWithComputedStyle from '../../../components/SGWithComputedStyle';
 import sgWithStyledPaddingHoc from '../../../components/hocs/sgWithStyledPadding';
 import {getYamlNode} from '../../../utils';
@@ -34,6 +35,8 @@ const Islands = ({data}) => {
       {classNames.map(c => (
         <div key={c} style={{marginBottom: '1.5rem'}}>
           <IslandPaddingStyled className={c} />
+
+          <SGDemoArea comp={<div className={c}>children</div>} hideComp />
         </div>
       ))}
     </div>

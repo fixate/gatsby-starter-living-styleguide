@@ -1,5 +1,6 @@
 import React from 'react';
 
+import SGDemoArea from '../../../components/SGDemoArea';
 import SGWithComputedStyle from '../../../components/SGWithComputedStyle';
 import SGWithStyledMargin from '../../../components/SGWithStyledMargin';
 import sgWithStyledPaddingHoc from '../../../components/hocs/sgWithStyledPadding';
@@ -31,9 +32,13 @@ const Wraps = ({data}) => {
       <h1>Wraps</h1>
 
       {classNames.map(c => (
-        <SGWithStyledMargin key={c} style={{marginBottom: '1.5rem'}}>
-          <WrapPaddingStyled className={c} />
-        </SGWithStyledMargin>
+        <div>
+          <SGWithStyledMargin key={c} style={{marginBottom: '1.5rem'}}>
+            <WrapPaddingStyled className={c} />
+          </SGWithStyledMargin>
+
+          <SGDemoArea comp={<div className={c}>children</div>} hideComp />
+        </div>
       ))}
     </div>
   );

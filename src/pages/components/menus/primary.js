@@ -1,5 +1,63 @@
 import React from 'react';
 
+import SGDemoArea from '../../../components/SGDemoArea';
+
+const getMenuMarkup = ({isOpen, onClick}) => (
+  <div className={isOpen ? 'is-open-menu' : ''}>
+    <button className="menu-toggle" onClick={onClick}>
+      menu toggle
+    </button>
+
+    <nav className=" menu--primary-container">
+      <ul className="menu--primary menu">
+        <li className="menu__item menu__item--current">
+          <a href="javascript:void(0);">home</a>
+        </li>
+        <li className="menu__item">
+          <a href="javascript:void(0);">item 1</a>
+          <ul className="menu menu__sub">
+            <li className="menu__item">
+              <a href="javascript:void(0);">item 1 child 1</a>
+            </li>
+            <li className="menu__item">
+              <a href="javascript:void(0);">item 1 child 2</a>
+              <ul className="menu menu__sub">
+                <li className="menu__item">
+                  <a href="javascript:void(0);">level 2 child 1</a>
+                </li>
+                <li className="menu__item">
+                  <a href="javascript:void(0);">level 2 child 2</a>
+                </li>
+                <li className="menu__item">
+                  <a href="javascript:void(0);">level 2 child 3</a>
+                </li>
+                <li className="menu__item">
+                  <a href="javascript:void(0);">level 2 child 4</a>
+                </li>
+              </ul>
+            </li>
+            <li className="menu__item">
+              <a href="javascript:void(0);">item 1 child 3</a>
+            </li>
+            <li className="menu__item">
+              <a href="javascript:void(0);">item 1 child 4</a>
+            </li>
+          </ul>
+        </li>
+        <li className="menu__item">
+          <a href="javascript:void(0);">item 2</a>
+        </li>
+        <li className="menu__item">
+          <a href="javascript:void(0);">item 3</a>
+        </li>
+        <li className="menu__item">
+          <a href="javascript:void(0);">item 4</a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+);
+
 class MenuPrimary extends React.Component {
   constructor() {
     super();
@@ -16,59 +74,7 @@ class MenuPrimary extends React.Component {
     const {isOpen} = this.state;
 
     return (
-      <div className={isOpen ? 'is-open-menu' : ''}>
-        <button className="menu-toggle" onClick={this.handleClick}>
-          menu toggle
-        </button>
-
-        <nav className=" menu--primary-container">
-          <ul className="menu--primary menu">
-            <li className="menu__item menu__item--current">
-              <a href="javascript:void(0);">home</a>
-            </li>
-            <li className="menu__item">
-              <a href="javascript:void(0);">item 1</a>
-              <ul className="menu menu__sub">
-                <li className="menu__item">
-                  <a href="javascript:void(0);">item 1 child 1</a>
-                </li>
-                <li className="menu__item">
-                  <a href="javascript:void(0);">item 1 child 2</a>
-                  <ul className="menu menu__sub">
-                    <li className="menu__item">
-                      <a href="javascript:void(0);">level 2 child 1</a>
-                    </li>
-                    <li className="menu__item">
-                      <a href="javascript:void(0);">level 2 child 2</a>
-                    </li>
-                    <li className="menu__item">
-                      <a href="javascript:void(0);">level 2 child 3</a>
-                    </li>
-                    <li className="menu__item">
-                      <a href="javascript:void(0);">level 2 child 4</a>
-                    </li>
-                  </ul>
-                </li>
-                <li className="menu__item">
-                  <a href="javascript:void(0);">item 1 child 3</a>
-                </li>
-                <li className="menu__item">
-                  <a href="javascript:void(0);">item 1 child 4</a>
-                </li>
-              </ul>
-            </li>
-            <li className="menu__item">
-              <a href="javascript:void(0);">item 2</a>
-            </li>
-            <li className="menu__item">
-              <a href="javascript:void(0);">item 3</a>
-            </li>
-            <li className="menu__item">
-              <a href="javascript:void(0);">item 4</a>
-            </li>
-          </ul>
-        </nav>
-      </div>
+      <SGDemoArea comp={getMenuMarkup({isOpen, onClick: this.handleClick})} />
     );
   }
 }
