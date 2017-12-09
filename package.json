@@ -10,7 +10,8 @@
   "dependencies": {
     "gatsby": "^1.9.73",
     "gatsby-link": "^1.6.24",
-    "gatsby-plugin-sass": "^1.0.13"
+    "gatsby-plugin-sass": "^1.0.13",
+    "react-element-to-jsx-string": "^13.1.0"
   },
   "devDependencies": {
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
