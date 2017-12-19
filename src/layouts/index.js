@@ -14,7 +14,7 @@ const Layout = ({children, data}) => {
       style={{
         display: 'grid',
         gridAutoFlow: 'column',
-        gridAutoColumns: '0fr 1fr',
+        gridTemplateColumns: 'auto 1fr',
       }}>
       <div style={{padding: '1em'}}>
         <SGMenu pages={pages} />
