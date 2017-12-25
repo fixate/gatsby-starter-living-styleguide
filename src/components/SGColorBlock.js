@@ -1,21 +1,21 @@
 import React, {Component} from 'react';
 
-const ColorBlock = ({children, color}) =>
+const ColorBlock = ({children, color}) => (
   <div
     style={{
       display: 'grid',
-      marginBottom: '1.5em',
+      marginBottom: '1rem',
     }}>
     <div
       style={{
         backgroundColor: color,
         padding: '3em',
-        marginBottom: '1.5rem',
       }}
     />
     <p>
       {children} {color ? ` - ${color}` : ''}
     </p>
-  </div>;
+  </div>
+);
 
 export default ColorBlock;
