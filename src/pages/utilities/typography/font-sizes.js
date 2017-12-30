@@ -1,7 +1,7 @@
 import React from 'react';
 
 import {getYamlNode} from '../../../utils';
-import SGWithComputedStyle from '../../../components/SGWithComputedStyle';
+import SGComputeStyle from '../../../components/SGComputeStyle';
 
 const FontSizes = ({data}) => {
   const {sizes} = getYamlNode(data, 'utilitiesFonts');
@@ -11,13 +11,19 @@ const FontSizes = ({data}) => {
       <h1>Font Size Utilities</h1>
 
       {Object.keys(sizes).map(key => (
-        <SGWithComputedStyle
+        <SGComputeStyle
           key={key}
-          className={sizes[key]}
           styleToCompute="font-size"
-          style={{textAlign: 'left'}}>
-          .{sizes[key]}
-        </SGWithComputedStyle>
+          render={({computedStyle, refCallback}) => (
+            <div
+              className={sizes[key]}
+              style={{textAlign: 'left'}}
+              ref={refCallback}>
+              .{sizes[key]}
+              {computedStyle ? ` - ${computedStyle}` : null}
+            </div>
+          )}
+        />
       ))}
     </div>
   );

@@ -1,7 +1,7 @@
 import React from 'react';
 
 import SGDemoArea from '../../../components/SGDemoArea';
-import SGWithComputedStyle from '../../../components/SGWithComputedStyle';
+import SGComputeStyle from '../../../components/SGComputeStyle';
 import SGWithStyledMargin from '../../../components/SGWithStyledMargin';
 import sgWithStyledPaddingHoc from '../../../components/hocs/sgWithStyledPadding';
 import {getYamlNode} from '../../../utils';
@@ -12,12 +12,20 @@ class Wrap extends React.Component {
   }
 
   render() {
-    const {computedStyle, ...restProps} = this.props;
+    const {className, ...restProps} = this.props;
 
     return (
-      <SGWithComputedStyle styleToCompute="max-width" {...restProps}>
-        <div style={{backgroundColor: '#f1f1f1'}}>.{this.props.className}</div>
-      </SGWithComputedStyle>
+      <SGComputeStyle
+        styleToCompute="max-width"
+        render={({refCallback, computedStyle}) => (
+          <div className={className} ref={refCallback}>
+            <div style={{backgroundColor: '#f1f1f1'}}>
+              .{className}
+              {computedStyle ? ` - ${computedStyle}` : null}
+            </div>
+          </div>
+        )}
+      />
     );
   }
 }

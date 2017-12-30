@@ -1,7 +1,7 @@
 import React from 'react';
 
 import {getYamlNode} from '../../../utils';
-import SGWithComputedStyle from '../../../components/SGWithComputedStyle';
+import SGComputeStyle from '../../../components/SGComputeStyle';
 
 const FontFamilies = ({data}) => {
   const {families} = getYamlNode(data, 'utilitiesFonts');
@@ -11,13 +11,15 @@ const FontFamilies = ({data}) => {
       <h1>Font Family Utilities</h1>
 
       {Object.keys(families).map(key => (
-        <SGWithComputedStyle
+        <SGComputeStyle
           key={key}
-          className={families[key]}
           styleToCompute="font-family"
-          style={{textAlign: 'left'}}>
-          .{families[key]}
-        </SGWithComputedStyle>
+          render={({computedStyle, refCallback}) => (
+            <div className={families[key]} ref={refCallback}>
+              .{families[key]} {computedStyle ? ` - ${computedStyle}` : null}
+            </div>
+          )}
+        />
       ))}
     </div>
   );

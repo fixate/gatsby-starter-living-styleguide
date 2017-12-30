@@ -1,7 +1,7 @@
 import React from 'react';
 
 import SGDemoArea from '../../../components/SGDemoArea';
-import SGWithComputedStyle from '../../../components/SGWithComputedStyle';
+import SGComputeStyle from '../../../components/SGComputeStyle';
 import sgWithStyledPaddingHoc from '../../../components/hocs/sgWithStyledPadding';
 import {getYamlNode} from '../../../utils';
 
@@ -11,14 +11,20 @@ class Island extends React.Component {
   }
 
   render() {
-    const {computedStyle, ...restProps} = this.props;
+    const {className, ...restProps} = this.props;
 
     return (
-      <SGWithComputedStyle styleToCompute="padding-top" {...restProps}>
-        <div style={{backgroundColor: '#f1f1f1', textAlign: 'center'}}>
-          .{this.props.className}
-        </div>
-      </SGWithComputedStyle>
+      <SGComputeStyle
+        styleToCompute="padding-top"
+        render={({computedStyle, refCallback}) => (
+          <div
+            className={className}
+            ref={refCallback}
+            style={{backgroundColor: '#f1f1f1', textAlign: 'center'}}>
+            .{className} {computedStyle ? ` - ${computedStyle}` : null}
+          </div>
+        )}
+      />
     );
   }
 }
