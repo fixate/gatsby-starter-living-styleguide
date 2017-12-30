@@ -3,7 +3,6 @@ import React from 'react';
 import SGDemoArea from '../../components/SGDemoArea';
 
 import {getYamlNode} from '../../utils';
-import sgWithPseudoClass from '../../components/hocs/sgWithPseudoClass';
 
 // use webpack to import all icons
 const _require = require.context('../../shared/img/icons', false, /\.svg$/);
