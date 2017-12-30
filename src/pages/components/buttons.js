@@ -3,77 +3,134 @@ import React from 'react';
 import SGDemoArea from '../../components/SGDemoArea';
 
 import {getYamlNode} from '../../utils';
-import sgWithPseudoClass from '../../components/hocs/sgWithPseudoClass';
+import SGPseudoStyles from '../../components/SGPseudoStyles';
 
-const ButtonWithPseudo = sgWithPseudoClass(
-  ({children = '', ...restProps} = {}) => (
-    <SGDemoArea comp={<button {...restProps}>button{children}</button>} />
-  )
+const ButtonWithPseudo = ({children, className, pseudoClass, ...rest}) => (
+  <SGPseudoStyles
+    className={className}
+    pseudoClass={pseudoClass}
+    render={({style}) => (
+      <button className={className} style={style}>
+        button{children}
+      </button>
+    )}
+  />
 );
-const AnchorWithPseudo = sgWithPseudoClass(
-  ({children = '', ...restProps} = {}) => (
-    <SGDemoArea
-      comp={
-        <a href="javascript: void(0)" {...restProps}>
-          a{children}
-        </a>
-      }
-    />
-  )
+
+const AnchorWithPseudo = ({
+  children = '',
+  className,
+  pseudoClass,
+  ...restProps
+} = {}) => (
+  <SGPseudoStyles
+    className={className}
+    pseudoClass={pseudoClass}
+    render={({style}) => (
+      <a
+        href="javascript: void(0)"
+        className={className}
+        style={style}
+        {...restProps}>
+        a{children}
+      </a>
+    )}
+  />
 );
-const LabelWithPseudo = sgWithPseudoClass(
-  ({children = '', ...restProps} = {}) => (
-    <SGDemoArea comp={<label {...restProps}>label{children}</label>} />
-  )
+
+const LabelWithPseudo = ({
+  children = '',
+  className,
+  pseudoClass,
+  ...restProps
+} = {}) => (
+  <SGPseudoStyles
+    className={className}
+    pseudoClass={pseudoClass}
+    render={({style}) => (
+      <label className={className} style={style} {...restProps}>
+        label{children}
+      </label>
+    )}
+  />
 );
-const InputWithPseudo = sgWithPseudoClass(props => (
-  <SGDemoArea comp={<input {...props} />} />
-));
+
+const InputWithPseudo = ({className, pseudoClass, ...restProps}) => (
+  <SGPseudoStyles
+    className={className}
+    pseudoClass={pseudoClass}
+    render={({style}) => (
+      <input className={className} style={style} {...restProps} />
+    )}
+  />
+);
+
+const getButtonsMarkup = ({
+  classNames = [],
+  pseudoClass = '',
+  ...restProps
+} = {}) => {
+  const className = classNames.join(' ');
+  const text = classNames
+    .map(c => `.${c}`)
+    .join('')
+    .concat(pseudoClass ? `:${pseudoClass}` : '');
+
+  return (
+    <div key={className}>
+      <h3>{text}</h3>
+
+      <div className="btn-container">
+        <AnchorWithPseudo
+          className={className}
+          pseudoClass={pseudoClass}
+          {...restProps}>
+          {text}
+        </AnchorWithPseudo>{' '}
+        <ButtonWithPseudo
+          className={className}
+          pseudoClass={pseudoClass}
+          {...restProps}>
+          {text}
+        </ButtonWithPseudo>{' '}
+        <LabelWithPseudo
+          className={className}
+          pseudoClass={pseudoClass}
+          {...restProps}>
+          {text}
+        </LabelWithPseudo>{' '}
+        <InputWithPseudo
+          className={className}
+          pseudoClass={pseudoClass}
+          type="submit"
+          value={`input[type=submit]${text}`}
+          {...restProps}
+        />
+        <ButtonWithPseudo
+          className={className}
+          pseudoClass={pseudoClass}
+          disabled
+          {...restProps}>
+          {text}[disabled]
+        </ButtonWithPseudo>{' '}
+        <SGDemoArea
+          hideComp
+          comp={
+            <a className={className} {...restProps}>
+              {text}
+            </a>
+          }
+        />
+      </div>
+    </div>
+  );
+};
 
 const Buttons = ({data}) => {
   const {modifiers, pseudos, states, types} = getYamlNode(
     data,
     'componentsButtons'
   );
-
-  const makeButtonsMarkup = (classNamesArray, pseudoClass) => {
-    const className = classNamesArray.join(' ');
-    const text = classNamesArray
-      .map(c => `.${c}`)
-      .join('')
-      .concat(pseudoClass ? `:${pseudoClass}` : '');
-
-    return (
-      <div key={className}>
-        <h3>{text}</h3>
-
-        <div className="btn-container">
-          <AnchorWithPseudo className={className} pseudoClass={pseudoClass}>
-            {text}
-          </AnchorWithPseudo>{' '}
-          <ButtonWithPseudo className={className} pseudoClass={pseudoClass}>
-            {text}
-          </ButtonWithPseudo>{' '}
-          <LabelWithPseudo className={className} pseudoClass={pseudoClass}>
-            {text}
-          </LabelWithPseudo>{' '}
-          <InputWithPseudo
-            className={className}
-            pseudoClass={pseudoClass}
-            type="submit"
-            value={`input[type=submit]${text}`}
-          />
-          <ButtonWithPseudo
-            className={className}
-            pseudoClass={pseudoClass}
-            disabled>
-            {text}[disabled]
-          </ButtonWithPseudo>{' '}
-        </div>
-        <br />
-      </div>
-    );
-  };
 
   return (
     <div>
@@ -82,23 +139,25 @@ const Buttons = ({data}) => {
       {types.map(type => (
         <div key={type}>
           <h2>.{type}</h2>
-          {makeButtonsMarkup([type])}
+          {getButtonsMarkup({classNames: [type]})}
 
           {Object.keys(modifiers).map(mkey => (
             <div key={`${type}${mkey}`}>
-              {modifiers[mkey].map(val => makeButtonsMarkup([type, val]))}
+              {modifiers[mkey].map(val =>
+                getButtonsMarkup({classNames: [type, val]})
+              )}
             </div>
           ))}
 
           {states.map(state => (
             <div key={`${type}${state}`}>
-              {makeButtonsMarkup([type, state])}
+              {getButtonsMarkup({classNames: [type, state]})}
             </div>
           ))}
 
           {pseudos.map(pseudo => (
             <div key={`${type}${pseudo}`}>
-              {makeButtonsMarkup([type], pseudo)}
+              {getButtonsMarkup({classNames: [type], pseudoClass: pseudo})}
             </div>
           ))}
         </div>
