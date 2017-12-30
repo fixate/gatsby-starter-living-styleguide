@@ -1,8 +1,8 @@
 import React from 'react';
 
 import SGDemoArea from '../../../components/SGDemoArea';
-import SGWithComputedStyle from '../../../components/SGWithComputedStyle';
-import sgWithStyledPaddingHoc from '../../../components/hocs/sgWithStyledPadding';
+import SGComputeStyle from '../../../components/SGComputeStyle';
+import SGStylePadding from '../../../components/SGStylePadding';
 import {getYamlNode} from '../../../utils';
 
 class Island extends React.Component {
@@ -11,19 +11,22 @@ class Island extends React.Component {
   }
 
   render() {
-    const {computedStyle, ...restProps} = this.props;
+    const {className, style, ...restProps} = this.props;
 
     return (
-      <SGWithComputedStyle styleToCompute="padding-top" {...restProps}>
-        <div style={{backgroundColor: '#f1f1f1', textAlign: 'center'}}>
-          .{this.props.className}
-        </div>
-      </SGWithComputedStyle>
+      <SGComputeStyle
+        styleToCompute="padding-top"
+        render={({computedStyle, refCallback}) => (
+          <div className={className} ref={refCallback} style={style}>
+            <div style={{backgroundColor: '#f1f1f1', textAlign: 'center'}}>
+              .{className} {computedStyle ? ` - ${computedStyle}` : null}
+            </div>
+          </div>
+        )}
+      />
     );
   }
 }
-
-const IslandPaddingStyled = sgWithStyledPaddingHoc(Island);
 
 const Islands = ({data}) => {
   const classNames = getYamlNode(data, 'componentsLayout').islands;
@@ -34,7 +37,9 @@ const Islands = ({data}) => {
 
       {classNames.map(c => (
         <div key={c} style={{marginBottom: '1.5rem'}}>
-          <IslandPaddingStyled className={c} />
+          <SGStylePadding
+            render={({style}) => <Island className={c} style={style} />}
+          />
 
           <SGDemoArea comp={<div className={c}>children</div>} hideComp />
         </div>

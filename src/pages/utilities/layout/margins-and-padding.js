@@ -1,49 +1,49 @@
 import React from 'react';
 
-import SGWithStyledMargin from '../../../components/SGWithStyledMargin';
-import SGWithComputedStyle from '../../../components/SGWithComputedStyle';
-import sgWithStyledPaddingHoc from '../../../components/hocs/sgWithStyledPadding';
+import SGComputeStyle from '../../../components/SGComputeStyle';
+import SGStyleMargin from '../../../components/SGStyleMargin';
+import SGStylePadding from '../../../components/SGStylePadding';
+
 import {getYamlNode} from '../../../utils';
 
 const PaddingItem = props => {
-  const {children, padding, style, ...restProps} = props;
+  const {className, children, padding, style, ...restProps} = props;
   const newStyle = Object.assign({}, style, {
     padding,
     marginBottom: '1.5rem',
   });
 
   return (
-    <SGWithComputedStyle
-      style={newStyle}
+    <SGComputeStyle
       styleToCompute={'padding-bottom'}
-      {...restProps}>
-      <div style={{backgroundColor: '#f1f1f1', textAlign: 'center'}}>
-        {children}
-      </div>
-    </SGWithComputedStyle>
+      render={({computedStyle, refCallback}) => (
+        <div className={className} ref={refCallback} style={newStyle}>
+          <div style={{backgroundColor: '#f1f1f1', textAlign: 'center'}}>
+            {children} {computedStyle ? ` - ${computedStyle}` : null}
+          </div>
+        </div>
+      )}
+    />
   );
 };
 
-const PaddingItemStyled = sgWithStyledPaddingHoc(PaddingItem);
-
-const MarginItemStyled = props => {
+const MarginItem = props => {
   const {children, className, ...restProps} = props;
 
   return (
-    <SGWithStyledMargin
-      style={{
-        marginBottom: '1.5rem',
-        display: 'table',
-        width: '100%',
-      }}
-      {...restProps}>
-      <SGWithComputedStyle
-        className={className}
-        style={{backgroundColor: '#f1f1f1'}}
-        styleToCompute={'margin-bottom'}>
-        <div>{children}</div>
-      </SGWithComputedStyle>
-    </SGWithStyledMargin>
+    <SGStyleMargin style={{marginBottom: '1.5rem'}} {...restProps}>
+      <SGComputeStyle
+        styleToCompute="margin-bottom"
+        render={({computedStyle, refCallback}) => (
+          <div
+            style={{backgroundColor: '#f1f1f1', textAlign: 'center'}}
+            className={className}
+            ref={refCallback}>
+            {children} {computedStyle ? ` - ${computedStyle}` : null}
+          </div>
+        )}
+      />
+    </SGStyleMargin>
   );
 };
 
@@ -57,17 +57,22 @@ const MarginsAndPadding = ({data}) => {
       <h2>Margins</h2>
 
       {margins.map(m => (
-        <MarginItemStyled key={m} className={m}>
+        <MarginItem key={m} className={m}>
           @mixin {m}
-        </MarginItemStyled>
+        </MarginItem>
       ))}
 
       <h2>Padding</h2>
 
       {paddings.map(p => (
-        <PaddingItemStyled className={p} key={p}>
-          @mixin {p}
-        </PaddingItemStyled>
+        <SGStylePadding
+          key={p}
+          render={({style}) => (
+            <PaddingItem style={style} className={p}>
+              @mixin {p}
+            </PaddingItem>
+          )}
+        />
       ))}
     </div>
   );
