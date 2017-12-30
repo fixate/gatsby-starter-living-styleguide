@@ -2,24 +2,21 @@ import React from 'react';
 
 import SGDemoArea from '../../../components/SGDemoArea';
 import SGComputeStyle from '../../../components/SGComputeStyle';
-import SGWithStyledMargin from '../../../components/SGWithStyledMargin';
-import sgWithStyledPaddingHoc from '../../../components/hocs/sgWithStyledPadding';
+import SGStyleMargin from '../../../components/SGStyleMargin';
+import SGStylePadding from '../../../components/SGStylePadding';
+
 import {getYamlNode} from '../../../utils';
 
 class Wrap extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
-    const {className, ...restProps} = this.props;
+    const {className, style, ...restProps} = this.props;
 
     return (
       <SGComputeStyle
         styleToCompute="max-width"
         render={({refCallback, computedStyle}) => (
-          <div className={className} ref={refCallback}>
-            <div style={{backgroundColor: '#f1f1f1'}}>
+          <div className={className} ref={refCallback} style={style}>
+            <div style={{backgroundColor: '#f1f1f1', textAlign: 'center'}}>
               .{className}
               {computedStyle ? ` - ${computedStyle}` : null}
             </div>
@@ -30,8 +27,6 @@ class Wrap extends React.Component {
   }
 }
 
-const WrapPaddingStyled = sgWithStyledPaddingHoc(Wrap);
-
 const Wraps = ({data}) => {
   const classNames = getYamlNode(data, 'componentsLayout').wraps;
 
@@ -41,9 +36,11 @@ const Wraps = ({data}) => {
 
       {classNames.map(c => (
         <div key={c}>
-          <SGWithStyledMargin key={c} style={{marginBottom: '1.5rem'}}>
-            <WrapPaddingStyled className={c} />
-          </SGWithStyledMargin>
+          <SGStyleMargin key={c} style={{marginBottom: '1.5rem'}}>
+            <SGStylePadding
+              render={({style}) => <Wrap style={style} className={c} />}
+            />
+          </SGStyleMargin>
 
           <SGDemoArea comp={<div className={c}>children</div>} hideComp />
         </div>
