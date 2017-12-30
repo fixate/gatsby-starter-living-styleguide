@@ -22,34 +22,26 @@ const getCssProps = reg => {
   return parseCssText([].concat(...props).join(''));
 };
 
-class PseudoStyles extends Component {
-  state = {style: {}};
+const getPseudoStyles = ({className, pseudoClass}) => {
+  if (!pseudoClass || !className) return;
 
-  componentDidMount() {
-    const {className, pseudoClass} = this.props;
+  const pseudoClassNames = className
+    ? className
+        .split(' ')
+        .filter(cn => !!cn)
+        .map(cn => [cn, pseudoClass].join(':'))
+    : [];
 
-    if (!pseudoClass || !className) return;
+  return pseudoClassNames
+    .map(pcn => new RegExp(`(^| )\.${pcn}`))
+    .map(getCssProps)
+    .reduce((acc, props) => Object.assign({}, acc, props), {});
+};
 
-    const pseudoClassNames = className
-      ? className
-          .split(' ')
-          .filter(cn => !!cn)
-          .map(cn => [cn, pseudoClass].join(':'))
-      : [];
-    const style = pseudoClassNames
-      .map(pcn => new RegExp(`(^| )\.${pcn}`))
-      .map(getCssProps)
-      .reduce((acc, props) => Object.assign({}, acc, props), {});
+const PseudoStyles = ({className, pseudoClass, render}) => {
+  const style = getPseudoStyles({className, pseudoClass});
 
-    this.setState({style});
-  }
-
-  render() {
-    const {style} = this.state;
-    const {render} = this.props;
-
-    return render({style});
-  }
-}
+  return render({style});
+};
 
 export default PseudoStyles;
