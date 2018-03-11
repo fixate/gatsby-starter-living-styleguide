@@ -3,7 +3,7 @@
   "description": "Gatsby living styleguide starter",
   "license": "MIT",
   "scripts": {
-    "develop": "gatsby develop",
+    "start": "gatsby develop",
     "build": "gatsby build",
     "serve": "gatsby serve"
   },
