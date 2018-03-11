@@ -8,16 +8,16 @@
     "serve": "gatsby serve"
   },
   "dependencies": {
-    "gatsby": "^1.9.73",
-    "gatsby-link": "^1.6.24",
-    "gatsby-plugin-sass": "^1.0.13",
+    "gatsby": "^1.9.231",
+    "gatsby-link": "^1.6.39",
+    "gatsby-plugin-sass": "^1.0.20",
     "react-element-to-jsx-string": "^13.1.0"
   },
   "devDependencies": {
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
-    "gatsby-source-filesystem": "^1.5.7",
-    "gatsby-transformer-yaml": "^1.5.11",
+    "gatsby-source-filesystem": "^1.5.27",
+    "gatsby-transformer-yaml": "^1.5.16",
     "sass-variable-loader": "^0.1.2",
-    "svg-sprite-loader": "^3.4.1"
+    "svg-sprite-loader": "^3.7.0"
   }
 }
