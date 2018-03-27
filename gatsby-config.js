@@ -21,6 +21,12 @@ module.exports = {
       },
     },
     'gatsby-transformer-yaml',
-    'gatsby-plugin-sass',
+
+    {
+      resolve: 'gatsby-plugin-sass',
+      // options: {
+      //   includePaths: ['node_modules/normalize.css'],
+      // },
+    },
   ],
 };
