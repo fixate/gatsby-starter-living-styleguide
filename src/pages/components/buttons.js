@@ -5,12 +5,12 @@ import SGDemoArea from '../../components/SGDemoArea';
 import {getYamlNode} from '../../utils';
 import SGPseudoStyles from '../../components/SGPseudoStyles';
 
-const ButtonWithPseudo = ({children, className, pseudoClass, ...rest}) => (
+const ButtonWithPseudo = ({children, className, pseudoClass, ...restProps}) => (
   <SGPseudoStyles
     className={className}
     pseudoClass={pseudoClass}
     render={({style}) => (
-      <button className={className} style={style}>
+      <button className={className} style={style} {...restProps}>
         button{children}
       </button>
     )}
