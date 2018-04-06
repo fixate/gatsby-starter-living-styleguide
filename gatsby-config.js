@@ -25,7 +25,7 @@ module.exports = {
     {
       resolve: 'gatsby-plugin-sass',
       // options: {
-      //   includePaths: ['node_modules/normalize.css'],
+      //   includePaths: [`${__dirname}/node_modules/normalize.css`],
       // },
     },
   ],
